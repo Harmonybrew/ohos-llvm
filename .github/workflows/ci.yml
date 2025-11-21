@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: [ "main" ]
+
+permissions: write-all
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ["21.1.5", "20.1.8", "19.1.7", "18.1.8", "17.0.6"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: sudo apt update && sudo apt install -y build-essential unzip cmake ninja-build python3
+
+      - name: Build
+        run: ./build.sh ${{ matrix.version }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.version }}
+          path: |
+            ${{ github.workspace }}/llvm-${{ matrix.version }}-ohos-arm64.tar.gz
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        if: github.event_name == 'release'
+        with:
+          files: |
+            ${{ github.workspace }}/llvm-${{ matrix.version }}-ohos-arm64.tar.gz

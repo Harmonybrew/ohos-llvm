@@ -1,0 +1,14 @@
+diff -r -u a/clang/lib/Driver/ToolChains/OHOS.cpp b/clang/lib/Driver/ToolChains/OHOS.cpp
+--- a/clang/lib/Driver/ToolChains/OHOS.cpp    2025-10-21 16:14:55.000000000 +0800
++++ b/clang/lib/Driver/ToolChains/OHOS.cpp    2025-10-22 00:00:00.000000000 +0800
+@@ -249,6 +249,11 @@
+       addSystemInclude(DriverArgs, CC1Args, makePath({IncPath, "c++", "v1"}));
+       addSystemInclude(DriverArgs, CC1Args, IncTargetPath);
+     }
++    std::string IncOHOSPath =
++        makePath({IncPath, "libcxx-ohos", "include", "c++", "v1"});
++    if (getVFS().exists(IncOHOSPath)) {
++      addSystemInclude(DriverArgs, CC1Args, IncOHOSPath);
++    }
+     break;
+   }
