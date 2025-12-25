@@ -20,12 +20,12 @@
 
 示例：
 ```sh
-hdc file send llvm-21.1.5-ohos-arm64.tar.gz /data
+hdc file send llvm-21.1.8-ohos-arm64.tar.gz /data
 hdc shell
 
 cd /data
-tar -zxf llvm-21.1.5-ohos-arm64.tar.gz
-export PATH=$PATH:/data/llvm-21.1.5-ohos-arm64/bin
+tar -zxf llvm-21.1.8-ohos-arm64.tar.gz
+export PATH=$PATH:/data/llvm-21.1.8-ohos-arm64/bin
 
 # 现在可以使用 clang 命令了
 ```
@@ -40,9 +40,9 @@ docker run -itd --name=ohos ghcr.io/hqzing/docker-mini-openharmony:latest
 docker exec -it ohos sh
 
 cd /root
-curl -L -O https://github.com/Harmonybrew/ohos-llvm/releases/download/20251121/llvm-21.1.5-ohos-arm64.tar.gz
-tar -zxf llvm-21.1.5-ohos-arm64.tar.gz -C /opt
-export PATH=$PATH:/opt/llvm-21.1.5-ohos-arm64/bin
+curl -L -O https://github.com/Harmonybrew/ohos-llvm/releases/download/21.1.8/llvm-21.1.8-ohos-arm64.tar.gz
+tar -zxf llvm-21.1.8-ohos-arm64.tar.gz -C /opt
+export PATH=$PATH:/opt/llvm-21.1.8-ohos-arm64/bin
 
 # 现在可以使用 clang 命令了
 ```
@@ -56,8 +56,7 @@ export PATH=$PATH:/opt/llvm-21.1.5-ohos-arm64/bin
 这里以 Ubuntu 24.04 x64 作为示例：
 ```sh
 sudo apt update && sudo apt install -y build-essential unzip cmake ninja-build python3
-./build.sh 21.1.5
-
+./build.sh
 ```
 
 **2\. 使用流水线构建**

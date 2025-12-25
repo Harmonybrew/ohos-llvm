@@ -1,15 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ -z "$1" ]; then
-    echo "usage: ./build.sh <version>"
-    echo "example: ./build.sh 21.1.5"
-    echo "support versions: >=17.0.0"
-    exit 1
-fi
-
-# llvm 的版本。这个脚本同时支持编 llvm 17、18、19、20、21，只需要输入不同的版本号就能自动下载对应版本的源码进行编译
-LLVM_VERSION=$1
+LLVM_VERSION="21.1.8"
 
 # 当前工作目录。拼接绝对路径的时候需要用到这个值。
 WORKDIR=$(pwd)
