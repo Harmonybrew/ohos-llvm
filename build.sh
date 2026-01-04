@@ -37,8 +37,8 @@ rm -rf llvmorg-${LLVM_VERSION}
 tar -zxf llvmorg-${LLVM_VERSION}.tar.gz
 cd llvm-project-llvmorg-${LLVM_VERSION}/
 
-# 打补丁，这是为了让 llvm 能识别 OpenHarmoy 的 libc++。
-# 参考了 OpenHarmoy 社区的处理方案：https://gitcode.com/openharmony/third_party_llvm-project/commit/42581c4cb83a4ef7cc2a06be92681a0cb50f4549?ref=llvm-19.1.7
+# 打补丁，这是为了让 llvm 能识别 OpenHarmony 的 libc++。
+# 参考了 OpenHarmony 社区的处理方案：https://gitcode.com/openharmony/third_party_llvm-project/commit/42581c4cb83a4ef7cc2a06be92681a0cb50f4549?ref=llvm-19.1.7
 patch -p1 < ../0001-adapt-to-ohos.patch
 
 # 编译本机工具（llvm-tblgen 和 clang-tblgen）。编 llvm 的时候需要它们做代码生成。

@@ -70,3 +70,15 @@ sudo apt update && sudo apt install -y build-essential unzip cmake ninja-build p
 1. Fork 本项目，生成个人仓
 2. 在个人仓的“Actions”菜单里面启用工作流
 3. 在个人仓提交代码或发版本，触发流水线运行
+
+## 常见问题
+
+**1\. 编译器不能正常使用**
+
+本项目提供的 LLVM 直接构建自 LLVM 官方上游代码，并不是由 OpenHarmony 社区维护的 [fork 版本](https://gitcode.com/openharmony/third_party_llvm-project)。
+
+由于 OpenHarmony 的大量平台适配尚未合入上游，本项目提供的 LLVM 对 OpenHarmony 的原生支持程度远不及 ohos-sdk 官方工具链。在深度使用场景下，可能会遇到构建失败或隐性兼容性故障。
+
+举个例子：虽然本项目发布了 LLVM 21 的制品，但是它里面的 libc++ 还是 LLVM 15 的 libc++，因为它的运行时库（包含 libc++）是从 ohos-sdk 6.0 （LLVM 15）复制过来的。如果你的 C++ 代码中使用到类似 `std::ranges` 之类的新特性，用这个 LLVM 21 去编译它一定会失败。
+
+对稳定性及特性完整性有较高要求的项目，请优先使用 ohos-sdk 提供的 LLVM 工具链。
